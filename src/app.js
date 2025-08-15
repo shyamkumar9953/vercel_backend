@@ -4,7 +4,13 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors());
+
+app.use(cors({
+  origin: 'https://codesence-ai.vercel.app', // your deployed frontend
+  methods: ['GET','POST'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.get("/", (req, res) => {

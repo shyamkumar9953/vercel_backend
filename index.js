@@ -1,6 +1,14 @@
- // index.js
 const serverless = require("serverless-http");
 const app = require("./src/app");
 
-module.exports = app; // This allows local dev
-module.exports.handler = serverless(app); // This is for Vercel
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 3000; // match your frontend
+  app.listen(PORT, () => {
+    console.log(`Server is running locally on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
+module.exports.handler = serverless(app);
+
+
